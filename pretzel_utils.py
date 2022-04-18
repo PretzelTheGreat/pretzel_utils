@@ -8,7 +8,7 @@ def import_json_file(filename, custom_loader=None):
     data = None
 
     with open(filename, 'r') as open_file:
-        data = json.load(filename, object_hook=custom_loader)
+        data = json.load(open_file, object_hook=custom_loader)
 
     return data
 
@@ -49,7 +49,7 @@ def import_file(filename, custom_loader=None):
         print(f"{filename} does not exist!")
         return None
 
-    file_ext = os.path.basename.split('.')[1]
+    file_ext = os.path.basename(filename).split('.')[1]
 
     if file_ext == 'json':
         return import_json_file(filename, custom_loader=custom_loader)
@@ -72,8 +72,8 @@ def save_json_file(filename, data, custom_encoder=None):
 
 def save_csv_file(filename, data, fieldnames):
     with open(filename, 'w', newline='') as open_file:
-        csvWriter = DictWriter(open_file)
-        csvWriter.writeheader(fieldnames)
+        csvWriter = DictWriter(open_file, fieldnames=fieldnames)
+        csvWriter.writeheader()
         for row in data:
             csvWriter.writerow(row)
 
@@ -87,7 +87,7 @@ def save_txt_file(filename, data):
 def save_file(filename, data, fieldnames=[], custom_encoder=None):
     filename = os.path.normpath(filename)
 
-    file_ext = os.path.basename.split('.')[1]
+    file_ext = os.path.basename(filename).split('.')[1]
 
     if file_ext == 'json':
         save_json_file(filename, data, custom_encoder=custom_encoder)
