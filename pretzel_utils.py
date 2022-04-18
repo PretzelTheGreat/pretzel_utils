@@ -3,6 +3,7 @@ import json
 from csv import DictReader, DictWriter
 
 
+# Loading Files
 def import_json_file(filename, custom_loader=None):
     data = None
 
@@ -61,3 +62,38 @@ def import_file(filename, custom_loader=None):
 
     else:
         return None
+
+
+# Saving Files
+def save_json_file(filename, data, custom_encoder=None):
+    with open(filename, 'w') as open_file:
+        json.dump(data, open_file, indent=4, default=custom_encoder)
+
+
+def save_csv_file(filename, data, fieldnames):
+    with open(filename, 'w', newline='') as open_file:
+        csvWriter = DictWriter(open_file)
+        csvWriter.writeheader(fieldnames)
+        for row in data:
+            csvWriter.writerow(row)
+
+
+def save_txt_file(filename, data):
+    with open(filename, 'w') as open_file:
+        for line in data:
+            open_file.write(f"{line}\n")
+
+
+def save_file(filename, data, fieldnames=[], custom_encoder=None):
+    filename = os.path.normpath(filename)
+
+    file_ext = os.path.basename.split('.')[1]
+
+    if file_ext == 'json':
+        save_json_file(filename, data, custom_encoder=custom_encoder)
+
+    elif file_ext == 'csv':
+        save_csv_file(filename, data, fieldnames)
+
+    elif file_ext == 'txt':
+        save_txt_file(filename, data)
