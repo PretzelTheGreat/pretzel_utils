@@ -93,7 +93,10 @@ def save_file(filename, data, fieldnames=[], custom_encoder=None):
     file_ext = os.path.basename(filename).split('.')[1]
 
     if file_ext == 'json':
-        save_json_file(filename, data, custom_encoder=custom_encoder)
+        if custom_encoder != None:
+            save_json_file(filename, data, custom_encoder=custom_encoder)
+        else:
+            save_json_file(filename, data)
 
     elif file_ext == 'csv':
         save_csv_file(filename, data, fieldnames)
