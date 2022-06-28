@@ -68,7 +68,7 @@ def import_file(filename, custom_loader=None):
 def save_json_file(filename, data, custom_encoder=None):
     with open(filename, 'w') as open_file:
         if custom_encoder != None:
-            json.dump(data, open_file, indent=4, default=custom_encoder)
+            json.dump(data, open_file, indent=4, cls=custom_encoder)
         else:
             json.dump(data, open_file, indent=4)
 
@@ -96,7 +96,7 @@ def save_file(filename, data, fieldnames=[], custom_encoder=None):
         if custom_encoder != None:
             save_json_file(filename, data, custom_encoder=custom_encoder)
         else:
-            save_json_file(filename, data)
+            save_json_file(filename, data, custom_encoder)
 
     elif file_ext == 'csv':
         save_csv_file(filename, data, fieldnames)
