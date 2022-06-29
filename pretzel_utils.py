@@ -103,3 +103,8 @@ def save_file(filename, data, fieldnames=[], custom_encoder=None):
 
     elif file_ext == 'txt':
         save_txt_file(filename, data)
+
+
+def get_new_uuid4_string():
+    from uuid import uuid4 as U4
+    return str(U4())
