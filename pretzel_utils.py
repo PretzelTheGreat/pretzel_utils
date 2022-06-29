@@ -4,11 +4,11 @@ from csv import DictReader, DictWriter
 
 
 # Loading Files
-def import_json_file(filename, custom_loader=None):
+def import_json_file(filename, object_hook=None, object_pairs_hook=None):
     data = None
 
     with open(filename, 'r') as open_file:
-        data = json.load(open_file, object_hook=custom_loader)
+        data = json.load(open_file, object_hook=object_hook, object_pairs_hook=object_pairs_hook)
 
     return data
 
@@ -35,12 +35,12 @@ def import_txt_file(filename):
     return data
 
 
-def import_file(filename, custom_loader=None):
+def import_file(filename, object_hook=None, object_pairs_hook=None):
     # generic function for importing files
     # file will be imported based on it's extention, with non-extention files being ignored
     # filename 
     #   can be an absolute or relative path, with the relative path starting in the directory this is called from
-    # custom_loader
+    # object_hook
     #   this is used to pass a custom object_hook to the json.loads function, in the event a custom class/object
     #   needs to be loaded
 
@@ -52,7 +52,7 @@ def import_file(filename, custom_loader=None):
     file_ext = os.path.basename(filename).split('.')[1]
 
     if file_ext == 'json':
-        return import_json_file(filename, custom_loader=custom_loader)
+        return import_json_file(filename, object_hook=object_hook, object_pairs_hook=object_pairs_hook)
 
     elif file_ext == 'csv':
         return import_csv_file(filename)
