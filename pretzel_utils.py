@@ -108,3 +108,14 @@ def save_file(filename, data, fieldnames=[], custom_encoder=None):
 def get_new_uuid4_string():
     from uuid import uuid4 as U4
     return str(U4())
+
+
+def exclude_fields(dct, fieldnames=[]):
+    # this is used to simplify sending a dict with only desired fields
+    new_dict = {}
+
+    for k, v in dct:
+        if k not in fieldnames:
+            new_dict[k] = v
+
+    return new_dict
