@@ -99,7 +99,12 @@ def save_file(filename, data, fieldnames=[], custom_encoder=None):
             save_json_file(filename, data, custom_encoder)
 
     elif file_ext == 'csv':
-        save_csv_file(filename, data, fieldnames)
+        if fieldnames == []:
+            if type(data) == list:
+                fieldnames = data[0].keys()
+            save_csv_file(filename, data, fieldnames)
+        else:
+            save_csv_file(filename, data, fieldnames)
 
     elif file_ext == 'txt':
         save_txt_file(filename, data)
