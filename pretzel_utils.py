@@ -198,10 +198,16 @@ def display_list_in_console(data, align="left", columns=4, width=8):
 
 
 def validate_user_input(user_input, valid_input):
-    pass
+    # for now, this will just be a list of valid options that 
+    # a user can type in
+    
+    if user_input in valid_input:
+        return False
+
+    return False
 
 
-def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_input=""):
+def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_input=[]):
     # this will handle user input, and also validate that input, if any valid input is
     # required. There will be a sepcial format for validation
 
