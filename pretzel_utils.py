@@ -236,6 +236,6 @@ def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_
             return user_input
 
         else:
-            return None            
+            return False            
 
     return user_input
