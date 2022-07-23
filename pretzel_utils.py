@@ -238,4 +238,4 @@ def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_
         else:
             return (user_input, False)           
 
-    return (user_input, None)
+    return user_input
