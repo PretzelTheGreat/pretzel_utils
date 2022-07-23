@@ -202,7 +202,7 @@ def validate_user_input(user_input, valid_input):
     # a user can type in
     
     if user_input in valid_input:
-        return False
+        return True
 
     return False
 
