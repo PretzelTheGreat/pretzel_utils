@@ -1,7 +1,10 @@
 import os
 import json
 from csv import DictReader, DictWriter
+from datetime import date
+import re
 
+date_fmt = re.compile("\d\d\d\d-\d\d-\d\d")
 
 # Loading Files
 def import_json_file(filename, object_hook=None, object_pairs_hook=None):
@@ -124,3 +127,15 @@ def exclude_fields(dct, fieldnames=[]):
             new_dict[k] = v
 
     return new_dict
+
+def save_date_as_string(o):
+    if isinstance(o, date):
+        return o.fromisoformat()
+
+    return o
+
+def load_date_as_obj(o):
+    if isinstance(o, str) and re.search(date_fmt, o):
+        return date.strftime(o)
+
+    return o
