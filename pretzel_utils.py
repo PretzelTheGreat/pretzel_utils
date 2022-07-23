@@ -1,9 +1,10 @@
 import os
 import json
-from csv import DictReader, DictWriter
-from datetime import date
 import re
 import math
+from csv import DictReader, DictWriter
+from datetime import date
+
 
 date_fmt = re.compile(r"\d\d\d\d-\d\d-\d\d")
 
@@ -194,3 +195,41 @@ def display_list_in_console(data, align="left", columns=4, width=8):
 
         start = end - 1
         end += columns
+
+
+def validate_user_input(user_input, valid_input):
+    pass
+
+
+def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_input=""):
+    # this will handle user input, and also validate that input, if any valid input is
+    # required. There will be a sepcial format for validation
+
+    if input_type == "SINGLE":
+        if message != "":
+            message = f"{message}\n>>> "
+        else:
+            message = ">>> "
+        user_input = input(message).strip()
+
+    elif input_type == "MULTI":
+        user_input = []
+        if message != "":
+            print(message)
+        while True:
+            line = input("(press enter twice to quit)>>> ").strip()
+
+            if line != "":
+                user_input.append(line)
+
+            else:
+                break
+
+    if validate_input:
+        if validate_user_input(user_input, valid_input):
+            return user_input
+
+        else:
+            return None            
+
+    return user_input
