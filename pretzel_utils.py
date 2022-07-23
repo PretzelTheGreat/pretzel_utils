@@ -4,7 +4,7 @@ from csv import DictReader, DictWriter
 from datetime import date
 import re
 
-date_fmt = re.compile("\d\d\d\d-\d\d-\d\d")
+date_fmt = re.compile(r"\d\d\d\d-\d\d-\d\d")
 
 # Loading Files
 def import_json_file(filename, object_hook=None, object_pairs_hook=None):
