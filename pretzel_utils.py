@@ -233,9 +233,9 @@ def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_
 
     if validate_input:
         if validate_user_input(user_input, valid_input):
-            return user_input
+            return (user_input, True)
 
         else:
-            return False            
+            return (user_input, False)           
 
-    return user_input
+    return (user_input, None)
