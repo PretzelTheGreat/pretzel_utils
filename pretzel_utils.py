@@ -239,15 +239,3 @@ def get_user_input(input_type="SINGLE", message="", validate_input=False, valid_
             return (user_input, False)           
 
     return user_input
-
-
-def exclude_keys_from_dict(dict_to_modify, keys_to_exclude):
-    # this will take a dictionary, and a list of keys, and will
-    # return a new dictionary with the keys taken out
-    new_dict = {}
-
-    for k, v in dict_to_modify.items():
-        if k not in keys_to_exclude:
-            new_dict[k] = v
-
-    return new_dict
