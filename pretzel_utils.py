@@ -3,7 +3,7 @@ import json
 import re
 import math
 from csv import DictReader, DictWriter
-from datetime import date
+import datetime
 
 
 date_fmt = re.compile(r"\d\d\d\d-\d\d-\d\d")
@@ -131,14 +131,14 @@ def exclude_fields(dct, fieldnames=[]):
     return new_dict
 
 def save_date_as_string(o):
-    if isinstance(o, date):
-        return o.fromisoformat()
+    if isinstance(o, datetime.date):
+        return o.isoformat()
 
     return o
 
 def load_date_as_obj(o):
     if isinstance(o, str) and re.search(date_fmt, o):
-        return date.strptime(o, "%Y-%m-%d")
+        return datetime.date.fromisoformat(o)
 
     return o
 
