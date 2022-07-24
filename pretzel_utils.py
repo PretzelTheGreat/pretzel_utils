@@ -13,7 +13,10 @@ def import_json_file(filename, object_hook=None, object_pairs_hook=None):
     data = None
 
     with open(filename, 'r') as open_file:
-        data = json.load(open_file, object_hook=object_hook, object_pairs_hook=object_pairs_hook)
+        if object_hook != None and object_pairs_hook == None:
+            data = json.load(open_file, object_hook=object_hook)
+        elif object_pairs_hook != None:
+            data = json.load(open_file, object_pairs_hook=object_pairs_hook)
 
     return data
 
