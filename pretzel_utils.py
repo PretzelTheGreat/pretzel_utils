@@ -160,20 +160,22 @@ def get_longest_word_from_list(list_of_words):
     return longest_word
 
 
-def display_list_in_console(data, align="left", columns=4, width=8):
+def display_list_in_console(data, align="left", columns=4, width=8, indent=0):
     # use this to primarily display lists of strings
     # width can be set by the user, but if it is not a larger amount
     # then the longest word in the list, then it would be ignored
+    # indent represents the indent depth (example: indent of 2 would be 8 spaces, or two tabs)
     rows = math.ceil(len(data) / columns)
     start = 0
     end = columns + 1
+    indent = indent * 4
 
     if align == "left":
-        row_format = "{:<{width}}" * (columns - 1) + "{:<}"
+        row_format = " " * indent + "{:<{width}}" * (columns - 1) + "{:<}"
     elif align == "center":
-        row_format = "{:^{width}}" * (columns - 1) + "{:^}"
+        row_format = " " * indent + "{:^{width}}" * (columns - 1) + "{:^}"
     elif align == "right":
-        row_format = "{:>{width}}" * (columns - 1) + "{:>}"
+        row_format = " " * indent + "{:>{width}}" * (columns - 1) + "{:>}"
 
     # this is used to determine the longest word in the list
     # and dynamically change the spacing to fit the words neatly, with 
