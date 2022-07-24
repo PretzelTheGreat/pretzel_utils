@@ -145,7 +145,6 @@ def load_date_as_obj(o):
     for k, v in o.items():
         if isinstance(v, str) and re.search(date_fmt, v):
             o[k] = datetime.date.fromisoformat(v)
-            return o
 
     return o
 
