@@ -17,6 +17,8 @@ def import_json_file(filename, object_hook=None, object_pairs_hook=None):
             data = json.load(open_file, object_hook=object_hook)
         elif object_pairs_hook != None:
             data = json.load(open_file, object_pairs_hook=object_pairs_hook)
+        else:
+            data = json.load(open_file)
 
     return data
 
@@ -140,8 +142,10 @@ def save_date_as_string(o):
     return o
 
 def load_date_as_obj(o):
-    if isinstance(o, str) and re.search(date_fmt, o):
-        return datetime.date.fromisoformat(o)
+    for k, v in o.items():
+        if isinstance(v, str) and re.search(date_fmt, v):
+            o[k] = datetime.date.fromisoformat(v)
+            return o
 
     return o
 
