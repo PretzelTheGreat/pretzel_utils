@@ -138,7 +138,7 @@ def save_date_as_string(o):
 
 def load_date_as_obj(o):
     if isinstance(o, str) and re.search(date_fmt, o):
-        return date.strftime(o)
+        return date.strptime(o, "%Y-%m-%d")
 
     return o
 
