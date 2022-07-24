@@ -135,13 +135,14 @@ def exclude_fields(dct, fieldnames=[]):
 
     return new_dict
 
-def save_date_as_string(o):
-    if isinstance(o, datetime.date):
-        return o.isoformat()
+class DateEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime.date):
+            return obj.isoformat
+        
+        return json.JSONEncoder.default(self, obj)
 
-    return o
-
-def load_date_as_obj(o):
+def DateDecoder(o):
     for k, v in o.items():
         if isinstance(v, str) and re.search(date_fmt, v):
             o[k] = datetime.date.fromisoformat(v)
