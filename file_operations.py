@@ -3,7 +3,7 @@ import json
 from csv import DictReader, DictWriter
 
 # Loading Files
-def import_json_file(filename, object_hook=None, object_pairs_hook=None):
+def load_json_file(filename, object_hook=None, object_pairs_hook=None):
     data = None
 
     with open(filename, 'r') as open_file:
@@ -17,7 +17,7 @@ def import_json_file(filename, object_hook=None, object_pairs_hook=None):
     return data
 
 
-def import_csv_file(filename):
+def load_csv_file(filename):
     data = []
 
     with open(filename, 'r') as open_file:
@@ -29,7 +29,7 @@ def import_csv_file(filename):
     return data
 
 
-def import_txt_file(filename):
+def load_txt_file(filename):
     data = []
 
     with open(filename, 'r') as open_file:
@@ -39,7 +39,7 @@ def import_txt_file(filename):
     return data
 
 
-def import_file(filename, object_hook=None, object_pairs_hook=None):
+def load_file(filename, object_hook=None, object_pairs_hook=None):
     # generic function for importing files
     # file will be imported based on it's extention, with non-extention files being ignored
     # filename 
@@ -56,13 +56,13 @@ def import_file(filename, object_hook=None, object_pairs_hook=None):
     file_ext = os.path.basename(filename).split('.')[1]
 
     if file_ext == 'json':
-        return import_json_file(filename, object_hook=object_hook, object_pairs_hook=object_pairs_hook)
+        return load_json_file(filename, object_hook=object_hook, object_pairs_hook=object_pairs_hook)
 
     elif file_ext == 'csv':
-        return import_csv_file(filename)
+        return load_csv_file(filename)
 
     elif file_ext == 'txt':
-        return import_txt_file(filename)
+        return load_txt_file(filename)
 
     else:
         return None
